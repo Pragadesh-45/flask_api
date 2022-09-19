@@ -28,9 +28,9 @@ def index():
 def get():
     return jsonify({'Students':students})
 
-@app.route("/students/<int:course_id>", methods = ['GET'])
+@app.route("/students/<int:student_id>", methods = ['GET'])
 def get_student(student_id):
-    return jsonify({'Student':student[student_id]})
+    return jsonify({'Student':students[student_id]})
 
 @app.route("/students", methods=['POST'])
 def create ():
