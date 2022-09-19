@@ -49,6 +49,11 @@ def student_update(student_id):
     students[student_id]['subject'] = "Biology"
     return jsonify({'student': students[student_id]})
 
+@app.route("/students/<int:student_id>", methods = ['DELETE'])
+def delete(student_id):
+    students.remove(students[student_id])
+    return jsonify({'result': True})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
