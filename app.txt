@@ -3,48 +3,56 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
-courses = [{
-    'name': "Python", 
-    'course_id' : "0", 
-    'Description' : "Python ...", 
-    'price' : "hello"
-}, {
-    'name': "Python1", 
-    'course_id' : "1", 
-    'Description' : "1Python ...", 
-    'price' : "1hello"
-}]
+students = [{
+    'name': "Fathima",
+    'student_id': "1",
+    'class': "1A1",
+    'subject': "Environmental Science" },
+    {
+    'name': "Vijay",
+    'student_id': "2",
+    'class': "4A2",
+    'subject': "Science" },
+    {
+    'name': "Antony",
+    'student_id': "3",
+    'class': "12A1",
+    'subject': "Computer Science" }]
 
 
 @app.route('/')
 def index():
     return "Welcome To Index Page"
 
-@app.route("/courses", methods = ['GET'])
+@app.route("/students", methods = ['GET'])
 def get():
-    return jsonify({'Courses':courses})
+    return jsonify({'Students':students})
 
-@app.route("/courses/<int:course_id>", methods = ['GET'])
-def get_course(course_id):
-    return jsonify({'Course':courses[course_id]})
+@app.route("/students/<int:course_id>", methods = ['GET'])
+def get_student(student_id):
+    return jsonify({'Student':student[student_id]})
 
-@app.route("/courses", methods=['POST'])
+@app.route("/students", methods=['POST'])
 def create ():
-    course = {
-    'name': "Python2", 
-    'course_id' : "2", 
-    'Description' : "2Python ...", 
-    'price' : "2hello"
-    }
+    student = {
+    'name': "Pablo Emilio Escobar Gaviria",
+    'student_id': "4",
+    'class': "12A1",
+    'subject': "Drugs" }
 
-    courses.append(course)
-    return jsonify({'Created': course})
+    students.append(student)
+    return jsonify({'Created': student})
 
 
-@app.route("/courses/<int:course_id>", methods = ['PUT'])
-def course_update(course_id):
-    courses['course_id']['Description'] = "XYZ"
-    return jsonify({'course': course[course_id]})
+@app.route("/students/<int:student_id>", methods = ['PUT'])
+def student_update(student_id):
+    students[student_id]['subject'] = "Biology"
+    return jsonify({'student': students[student_id]})
+
+@app.route("/students/<int:student_id>", methods = ['DELETE'])
+def delete(student_id):
+    students.remove(students[student_id])
+    return jsonify({'result': True})
 
 
 if __name__ == "__main__":
